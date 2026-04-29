@@ -279,12 +279,16 @@ class MultiClass(_PluginBase):
             path_parts = []
 
             if self._collection_class and c_name:
-                # 当collection为true时，只添加collection name
                 # 清理collection名称，移除特殊字符
                 clean_c_name = str(c_name).strip()
                 if clean_c_name:
-                    # 1. 删除了原有的 path_parts.append("系列电影") 
-                    # 2. 直接将系列名称拼接为你想要的格式
+                    # 剥离 TMDB 命名中自带的各种“系列”后缀，防止重复
+                    for suffix in ["（系列）", "(系列)", " 系列", "系列", "合集"]:
+                        if clean_c_name.endswith(suffix):
+                            clean_c_name = clean_c_name[:-len(suffix)].strip()
+                            break # 匹配到一种后缀剥离后就跳出
+                            
+                    # 统一拼接为你想要的规范格式
                     path_parts.append(f"{clean_c_name}（系列）")
             else:
                 # 当collection不为true时，根据其他配置添加路径
