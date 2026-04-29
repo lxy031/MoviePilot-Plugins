@@ -9,7 +9,7 @@ from app.schemas.types import ChainEventType, MediaType, NotificationType
 
 class MultiClass(_PluginBase):
     # 插件名称
-    plugin_name = "视频多级分类"
+    plugin_name = "视频多级分类(魔改)"
     # 插件描述
     plugin_desc = "支持电影按照评分，年代和系列分类"
     # 插件图标
