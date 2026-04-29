@@ -283,8 +283,9 @@ class MultiClass(_PluginBase):
                 # 清理collection名称，移除特殊字符
                 clean_c_name = str(c_name).strip()
                 if clean_c_name:
-                    path_parts.append("系列电影")
-                    path_parts.append(clean_c_name)
+                    # 1. 删除了原有的 path_parts.append("系列电影") 
+                    # 2. 直接将系列名称拼接为你想要的格式
+                    path_parts.append(f"{clean_c_name}（系列）")
             else:
                 # 当collection不为true时，根据其他配置添加路径
                 if self._vote_class and vote_path:
